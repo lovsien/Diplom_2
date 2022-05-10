@@ -57,12 +57,4 @@ public class UserInformationUpdateWithAuthorizationTest {
         userClient.changeUserEmailWithAuthorization(token, user);
     }
 
-    //TODO: переписать кейс - очень плохой
-    @Test
-    @DisplayName("Update user's email on existing user's email while he's authorized")
-    @Description("There should be message: \"User with such email already exists\". Response should have status code 403. ")
-    public void updateUserEmailOnExistingReturnsForbidden() {
-        user.setEmail("test-data@yandex.ru");
-        userClient.changeUserEmailWithAuthWithExistingEmail(token, user);
-    }
 }
