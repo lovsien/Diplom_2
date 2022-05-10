@@ -107,19 +107,21 @@ public class UserClient extends StellarburgersRestClient {
 
     @Step("Log out from the system")
     public void logout(UserCredentials credentials) {
+        Token refreshToken = new Token(getRefreshToken(credentials));
+
         RestAssured.given()
                 .spec(requestSpecification())
-                .body(getRefreshToken(credentials))
+                .body(refreshToken)
                 .when()
                 .post(USER_AUTH_LOGOUT_PATH)
-                .then()
+                .then().log().all()
                 .assertThat()
                 .statusCode(SC_OK)
                 .body("success", equalTo(true))
                 .body("message", equalTo("Successful logout"));
     }
 
-    public Token getRefreshToken(UserCredentials credentials) {
+    public String getRefreshToken(UserCredentials credentials) {
         return RestAssured.given()
                 .spec(requestSpecification())
                 .body(credentials)
@@ -127,25 +129,10 @@ public class UserClient extends StellarburgersRestClient {
                 .post(USER_AUTH_LOGIN_PATH)
                 .then().log().all()
                 .assertThat()
-                .statusCode(SC_UNAUTHORIZED)
-                .body("success", equalTo(false))
-                .body("message", equalTo("email or password are incorrect"))
-                .extract()
-                .path("refreshToken");
-    }
-
-    @Step("Get user's information, using authorization")
-    public void getUserInformationWithAuthorization(String token) {
-        RestAssured.given()
-                .spec(requestSpecification())
-                .auth().oauth2(token)
-                .when()
-                .get(USER_AUTH_USER)
-                .then().log().all()
-                .assertThat()
                 .statusCode(SC_OK)
                 .body("success", equalTo(true))
-                .body("user", notNullValue());
+                .extract()
+                .path("refreshToken");
     }
 
     @Step("Change user's name, using authorization")
