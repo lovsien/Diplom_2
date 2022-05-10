@@ -21,6 +21,7 @@ public class UserRegisterTest {
 
         String token = userClient.loginWithCorrectCredentials(credentials);
         userClient.delete(token);
+        userClient.delete(token);
     }
 
     @Test
