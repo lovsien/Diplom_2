@@ -1,12 +1,14 @@
+package user;
+
 import io.qameta.allure.Description;
 import io.qameta.allure.junit4.DisplayName;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import site.nomoreparties.stellarburgers.User;
-import site.nomoreparties.stellarburgers.UserClient;
-import site.nomoreparties.stellarburgers.UserCredentials;
+import site.nomoreparties.stellarburgers.user.User;
+import site.nomoreparties.stellarburgers.user.UserClient;
+import site.nomoreparties.stellarburgers.user.UserCredentials;
 
 public class UserInformationUpdateWithAuthorizationTest {
 

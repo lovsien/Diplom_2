@@ -1,8 +1,10 @@
+package user;
+
 import io.qameta.allure.Description;
 import io.qameta.allure.junit4.DisplayName;
 import org.junit.Test;
-import site.nomoreparties.stellarburgers.User;
-import site.nomoreparties.stellarburgers.UserClient;
+import site.nomoreparties.stellarburgers.user.User;
+import site.nomoreparties.stellarburgers.user.UserClient;
 
 public class UserRegisterNegativeTest {
 

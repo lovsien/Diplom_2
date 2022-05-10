@@ -1,4 +1,4 @@
-package site.nomoreparties.stellarburgers;
+package site.nomoreparties.stellarburgers.user;
 
 import lombok.Builder;
 import lombok.Data;

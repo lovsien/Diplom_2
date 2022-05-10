@@ -1,9 +1,10 @@
-package site.nomoreparties.stellarburgers;
+package site.nomoreparties.stellarburgers.user;
 
 import io.qameta.allure.Allure;
 import io.qameta.allure.Step;
 import io.restassured.RestAssured;
 import org.apache.commons.lang3.RandomStringUtils;
+import site.nomoreparties.stellarburgers.StellarburgersRestClient;
 
 import static org.apache.http.HttpStatus.*;
 import static org.hamcrest.Matchers.*;
