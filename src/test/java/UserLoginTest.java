@@ -42,7 +42,7 @@ public class UserLoginTest {
             "Expected results: " +
             "Status code - 200. Success - true. Access and refresh tokens are not null values." +
             "3. Delete the user.")
-    public void loginWithCorrectDataExistingUser() {
+    public void loginWithCorrectDataExistingUserReturnsOK() {
         UserCredentials credentialsForLogin = UserCredentials.builder()
                 .email(credentials.getEmail())
                 .password(credentials.getPassword())
@@ -58,7 +58,7 @@ public class UserLoginTest {
             "Expected results: " +
             "Status code - 401. Success - false. Message - email or password are incorrect." +
             "3. Delete the user.")
-    public void loginWithIncorrectLogin() {
+    public void loginWithIncorrectLoginReturnsUnauthorized() {
         UserCredentials credentialsForLogin = UserCredentials.builder()
                 .email(credentials.getEmail() + "1")
                 .password(credentials.getPassword())
@@ -74,7 +74,7 @@ public class UserLoginTest {
             "Expected results: " +
             "Status code - 401. Success - false. Message - email or password are incorrect." +
             "3. Delete the user.")
-    public void loginWithIncorrectPassword() {
+    public void loginWithIncorrectPasswordReturnsUnauthorized() {
         UserCredentials credentialsForLogin = UserCredentials.builder()
                 .email(credentials.getEmail())
                 .password(credentials.getPassword() + "1")
