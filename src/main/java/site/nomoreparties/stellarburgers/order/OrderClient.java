@@ -52,7 +52,7 @@ public class OrderClient extends StellarburgersRestClient {
                 .assertThat()
                 .statusCode(SC_OK)
                 .body("success", equalTo(true))
-                .body("order.ingredients", notNullValue());
+                .body("order.number", notNullValue());
     }
 
     @Step("Create an order without ingredients while user is authorized")
@@ -106,12 +106,9 @@ public class OrderClient extends StellarburgersRestClient {
                 .post(ORDERS)
                 .then().log().ifValidationFails()
                 .assertThat()
-                .statusCode(SC_INTERNAL_SERVER_ERROR)
-                .body("success", equalTo(false))
-                .body("message", equalTo("Ingredient ids must be provided"));
+                .statusCode(SC_INTERNAL_SERVER_ERROR);
     }
 
-    //TODO: проверить total
     @Step("Get user's orders with authorization")
     public void getOrdersWithAuthorization(String token) {
         RestAssured.given()
@@ -125,7 +122,6 @@ public class OrderClient extends StellarburgersRestClient {
                 .body("success", equalTo(true));
     }
 
-    //TODO: проверить total
     @Step("Get user's orders without authorization")
     public void getOrdersWithoutAuthorization() {
         RestAssured.given()
