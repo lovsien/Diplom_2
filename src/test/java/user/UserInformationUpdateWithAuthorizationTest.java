@@ -42,7 +42,7 @@ public class UserInformationUpdateWithAuthorizationTest {
     }
 
     @Test
-    @DisplayName("Update user's name while he's authorized")
+    @DisplayName("Updating user's name while he's authorized returns 200 OK")
     @Description("User's name should be equal to set value. Response should have status code 200. ")
     public void updateUserNameFieldWithAuthorizationReturnsOK() {
         user.setName(RandomStringUtils.randomAlphabetic(5));
@@ -50,7 +50,7 @@ public class UserInformationUpdateWithAuthorizationTest {
     }
 
     @Test
-    @DisplayName("Update user's email while he's authorized")
+    @DisplayName("Updating user's email while he's authorized returns 200 OK")
     @Description("User's email should be equal to set value. Response should have status code 200. ")
     public void updateUserEmailFieldWithAuthorizationReturnsOK() {
         user.setEmail(RandomStringUtils.randomAlphabetic(5).toLowerCase() + "@mail.com");

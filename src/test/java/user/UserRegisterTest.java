@@ -26,7 +26,7 @@ public class UserRegisterTest {
     }
 
     @Test
-    @DisplayName("Creating a unique user with correct data")
+    @DisplayName("Creating a unique user with correct data returns 200 OK")
     @Description("Registration of a new unique user returns status code 200 OK")
     public void createUniqueUserReturnsOk() {
         credentials = userClient.getRandomUserTestData();
@@ -40,7 +40,7 @@ public class UserRegisterTest {
     }
 
     @Test
-    @DisplayName("Create an existing user returns 403")
+    @DisplayName("Creating an existing user returns 403 Forbidden")
     @Description("Registration with already existing data returns status code 403 Forbidden and message:\"User already exists\"")
     public void createExistingUserReturnsForbidden() {
         credentials = userClient.getRandomUserTestData();

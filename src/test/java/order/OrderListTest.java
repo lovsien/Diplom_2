@@ -1,5 +1,7 @@
 package order;
 
+import io.qameta.allure.Description;
+import io.qameta.allure.junit4.DisplayName;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -10,11 +12,12 @@ import site.nomoreparties.stellarburgers.user.UserCredentials;
 
 public class OrderListTest {
 
-    OrderClient orderClient = new OrderClient();
     UserClient userClient = new UserClient();
+    OrderClient orderClient = new OrderClient();
     UserCredentials credentials;
     User user;
     String token;
+    int totalOrders;
 
     @Before
     public void setUp() {
@@ -41,13 +44,18 @@ public class OrderListTest {
     }
 
     @Test
-    public void getUserOrderListWithoutAuthorization() {
+    @DisplayName("Getting user's order list when user isn't authorized returns 401 Unauthorised")
+    public void getUserOrderListWithoutAuthorizationReturns401() {
         userClient.logout(credentials);
         orderClient.getOrdersWithoutAuthorization();
     }
 
     @Test
-    public void getUserOrderListWithAuthorization() {
-        orderClient.getOrdersWithAuthorization(token);
+    @DisplayName("Getting user's order list when user is authorized returns 200 OK")
+    @Description("Register new user. Authorize and get order list. As user don't have any orders, " +
+            "amounts of total and totalToday should be zero.")
+    public void getUserOrderListWithAuthorizationReturns200() {
+        totalOrders = 0;
+        orderClient.getOrdersWithAuthorization(token, totalOrders);
     }
 }

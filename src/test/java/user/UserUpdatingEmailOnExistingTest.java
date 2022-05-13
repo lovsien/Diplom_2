@@ -45,7 +45,7 @@ public class UserUpdatingEmailOnExistingTest {
     }
 
     @Test
-    @DisplayName("Update user's email on existing user's email while he's authorized")
+    @DisplayName("Updating user's email on existing user's email while he's authorized returns 403 Forbidden")
     @Description("There should be message: \"User with such email already exists\". Response should have status code 403. ")
     public void updateUserEmailOnExistingReturnsForbidden() {
         User secondUser = userClient.getRandomUserTestData();

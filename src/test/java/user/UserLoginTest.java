@@ -38,12 +38,10 @@ public class UserLoginTest {
     }
 
     @Test
-    @DisplayName("Login with correct data of existing user")
-    @Description("1. Register a new user. " +
-            "2. Login with correct data. " +
+    @DisplayName("Login with correct data of existing user returns 200 OK")
+    @Description("Register a new user. Login with correct data. " +
             "Expected results: " +
-            "Status code - 200. Success - true. Access and refresh tokens are not null values." +
-            "3. Delete the user.")
+            "Status code - 200. Access and refresh tokens are not null values.")
     public void loginWithCorrectDataExistingUserReturnsOK() {
         UserCredentials credentialsForLogin = UserCredentials.builder()
                 .email(credentials.getEmail())
@@ -54,12 +52,10 @@ public class UserLoginTest {
     }
 
     @Test
-    @DisplayName("Login with incorrect login")
-    @Description("1. Register a new user. " +
-            "2. Login with incorrect email. " +
+    @DisplayName("Login with incorrect login returns 401 Unauthorized")
+    @Description("Register a new user. Login with incorrect email. " +
             "Expected results: " +
-            "Status code - 401. Success - false. Message - email or password are incorrect." +
-            "3. Delete the user.")
+            "Status code - 401. Message - email or password are incorrect.")
     public void loginWithIncorrectLoginReturnsUnauthorized() {
         UserCredentials credentialsForLogin = UserCredentials.builder()
                 .email(credentials.getEmail() + "1")
@@ -70,12 +66,10 @@ public class UserLoginTest {
     }
 
     @Test
-    @DisplayName("Login with incorrect password")
-    @Description("1. Register a new user. " +
-            "2. Login with incorrect password. " +
+    @DisplayName("Login with incorrect password returns 401 Unauthorized")
+    @Description("Register a new user. Login with incorrect password. " +
             "Expected results: " +
-            "Status code - 401. Success - false. Message - email or password are incorrect." +
-            "3. Delete the user.")
+            "Status code - 401. Message - email or password are incorrect.")
     public void loginWithIncorrectPasswordReturnsUnauthorized() {
         UserCredentials credentialsForLogin = UserCredentials.builder()
                 .email(credentials.getEmail())
