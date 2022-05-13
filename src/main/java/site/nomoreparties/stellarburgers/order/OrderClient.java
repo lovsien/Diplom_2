@@ -38,7 +38,8 @@ public class OrderClient extends StellarburgersRestClient {
                 .assertThat()
                 .statusCode(SC_OK)
                 .body("success", equalTo(true))
-                .body("order.ingredients", notNullValue());
+                .body("order.ingredients", notNullValue())
+                .body("order.number", notNullValue());
     }
 
     @Step("Create an order with ingredients without authorization")
@@ -92,7 +93,7 @@ public class OrderClient extends StellarburgersRestClient {
                 .body(order)
                 .when()
                 .post(ORDERS)
-                .then().log().ifValidationFails()
+                .then().log().ifStatusCodeIsEqualTo(SC_OK)
                 .assertThat()
                 .statusCode(SC_INTERNAL_SERVER_ERROR);
     }
@@ -104,22 +105,24 @@ public class OrderClient extends StellarburgersRestClient {
                 .body(order)
                 .when()
                 .post(ORDERS)
-                .then().log().ifValidationFails()
+                .then().log().ifStatusCodeIsEqualTo(SC_OK)
                 .assertThat()
                 .statusCode(SC_INTERNAL_SERVER_ERROR);
     }
 
     @Step("Get user's orders with authorization")
-    public void getOrdersWithAuthorization(String token) {
+    public void getOrdersWithAuthorization(String token, int total) {
         RestAssured.given()
                 .spec(requestSpecification())
                 .auth().oauth2(token)
                 .when()
                 .get(ORDERS)
-                .then().log().all()
+                .then().log().ifError()
                 .assertThat()
                 .statusCode(SC_OK)
-                .body("success", equalTo(true));
+                .body("success", equalTo(true))
+                .body("total", equalTo(total))
+                .body("totalToday", equalTo(total));
     }
 
     @Step("Get user's orders without authorization")
@@ -128,7 +131,7 @@ public class OrderClient extends StellarburgersRestClient {
                 .spec(requestSpecification())
                 .when()
                 .get(ORDERS)
-                .then().log().all()
+                .then().log().ifValidationFails()
                 .assertThat()
                 .statusCode(SC_UNAUTHORIZED)
                 .body("success", equalTo(false))
